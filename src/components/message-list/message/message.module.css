@@ -1,0 +1,22 @@
+.message {
+background-color: #262D31;
+color: #fff;
+max-width: 70%;
+padding: 0 10px;
+align-self: flex-start;
+margin: 10px;
+border-radius: 10px;
+}
+
+.userMessage {
+  background-color: #046162;
+  align-self: flex-end;
+}
+
+.author {
+  font-size: 12px;
+}
+
+.text {
+  font-size: 16px;
+}

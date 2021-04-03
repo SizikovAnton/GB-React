@@ -1,0 +1,43 @@
+/* TODO Разобраться с полосой прокрутки для списка сообщений */
+
+.messageList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  height: 100%;
+  overflow: auto;
+}
+
+.msgForm {
+  background-color: #1E2428;
+  width: 100%;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.msgForm__input {
+  background-color: #32383B;
+  border-radius: 10px;
+  margin: 0 10px;
+  padding: 0 10px;
+  flex: 2;
+  /* width: 80%; */
+}
+
+/* TODO Перенести стили в withStyles */
+.msgForm__input input {
+  color: #fff;
+}
+
+.msgForm__input input::placeholder{
+  color: #fff;
+}
+
+.msgButton {
+  margin-right: 10px !important;
+}
