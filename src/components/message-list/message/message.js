@@ -19,6 +19,7 @@ export class Message extends React.Component {
 
     return (
       // TODO Найти как передавать несколько классов в className
+      // TODO npm classnames
       <div className={msgCss}>
         <p className={styles.author}>{this.props.author}</p>
         <p className={styles.text}>{this.props.message}</p>

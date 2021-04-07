@@ -1,5 +1,5 @@
 import { Input, Button, withStyles } from "@material-ui/core"
-import React from "react"
+import React, { createRef } from "react"
 import { Message } from "./message"
 
 import styles from "./message-list.module.css"
@@ -24,20 +24,22 @@ export class MessageList extends React.Component {
     value: "",
   }
 
+  ref = createRef()
+
   handleChangeInput = ({ target }) => {
     this.setState({
       value: target.value,
     })
   }
 
-  sendMsg = ({ author, text }) => {
+  sendMsg = (_author, text) => {
     if (text) {
       this.setState((state) => ({
         messages: [
           ...state.messages,
           {
             message: text,
-            author: author,
+            author: _author,
           },
         ],
         value: "",
@@ -46,12 +48,20 @@ export class MessageList extends React.Component {
   }
 
   handleClick = () => {
-    this.sendMsg({ author: "user", text: this.state.value })
+    this.sendMsg("user", this.state.value)
   }
 
   handlePressInput = ({ code }) => {
     if (code === "Enter") {
-      this.sendMsg({ author: "user", text: this.state.value })
+      this.sendMsg("user", this.state.value)
+    }
+  }
+
+  handleScrollBottom = () => {
+    if (this.ref.current) {
+      this.ref.current.scrollTo(0, this.ref.current.scrollHeight)
+      console.log(this.ref.current)
+      console.log(this.ref.current.scrollHeight)
     }
   }
 
@@ -61,17 +71,21 @@ export class MessageList extends React.Component {
       state.message !== this.state.messages
     ) {
       setTimeout(() => {
-        this.sendMsg({ author: "mr. Robot", text: "Ответ на сообщение" })
+        this.sendMsg("mr. Robot", "Ответ на сообщение")
       }, 500)
     }
+
+    this.handleScrollBottom()
   }
 
   render() {
     return (
-      <div className={styles.messageList}>
-        {this.state.messages.map((obj, index) => (
-          <Message key={index} message={obj.message} author={obj.author} />
-        ))}
+      <div className={styles.messageListWrap}>
+        <div ref={this.ref} className={styles.messageList}>
+          {this.state.messages.map((obj, index) => (
+            <Message key={index} message={obj.message} author={obj.author} />
+          ))}
+        </div>
         <div className={styles.msgForm}>
           <Input
             id="msgInput"
